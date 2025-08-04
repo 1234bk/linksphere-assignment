@@ -1,56 +1,90 @@
-LinkSphere
-LinkSphere is a mini community web application inspired by LinkedIn. It is built with the MERN stack (MongoDB, Express, React, Node.js) and offers features such as user authentication, post creation, profile viewing, and an admin dashboard.
-
-
+🔗 LinkSphere
+LinkSphere is a mini-community web application inspired by LinkedIn. Built with the MERN stack, it allows users to sign up, create and explore posts, view user profiles, and access an admin dashboard.
 
 🌟 Features
-🔐 User Authentication with JWT
+🔐 JWT-based Authentication
 
-🏠 Home Dashboard showing all public posts
+🏠 Home Feed showing all public posts
 
-👤 View Profiles: Anyone can view user profiles and their posts
+✍️ Create Post (only available to logged-in users)
 
-🔍 Search Users: Search for profiles by name
+👤 View Profiles with user-specific posts
 
-✍️ Authenticated Posting: Only signed-in users can add posts
+🔍 Search Users by name
 
-📄 My Profile: Logged-in users can view and manage their own profile and posts
-
-🛡 Admin Panel: Admins can access and manage all user data
+📄 My Profile Page for managing user info and posts
 
 
 
 
 🚀 Tech Stack
-Frontend: React.js, Axios, Tailwind CSS
+🔹 Frontend
+React.js
 
-Backend: Express.js, Node.js, MongoDB Atlas
+Tailwind CSS
 
-Authentication: JWT (JSON Web Token)
+Axios
 
-Image Uploads: Cloudinary
+🔹 Backend
+Node.js
 
-API Calls: Axios
+Express.js
+
+MongoDB Atlas
+
+
+
+🔹 Other Tools
+JWT for Authentication
+
+Cloudinary for Image Uploads
+
+Multer for file handling
 
 
 
 🛠️ Installation & Setup
-Clone the repository and install dependencies for both backend and frontend.
+Clone the repository and install dependencies for both frontend and backend.
 
+🔧 Backend Setup
 
-
-
-🔹For Backend
-
-Copy code
-cd server
+git clone https://github.com/1234bk/linksphere-assignment.git
+cd linksphere-assignment/backend
 npm install
-npm start
+Create a .env file in /server with the following:
 
+env backend
+MONGO_URI=mongodb://temp:temp@ac-tkbbofv-shard-00-00.yya0xap.mongodb.net:27017,ac-tkbbofv-shard-00-01.yya0xap.mongodb.net:27017,ac-tkbbofv-shard-00-02.yya0xap.mongodb.net:27017/template?ssl=true&replicaSet=atlas-241kq0-shard-0&authSource=admin&retryWrites=true&w=majority
+JWT_SECRET=Temp
+PORT=3000
 
-🔹For Frontend
+CLOUDINARY_CLOUD_NAME="surajgsn"
+CLOUDINARY_API_KEY="852652549314759"
+CLOUDINARY_API_SECRET="QJz1gDQk0Fts_Qu3E3W6sK2Imrk"
+ORIGIN_URL="http://localhost:3000"
 
-Copy code
-cd client
-npm install
+Then run the server:
 npm run dev
+
+
+
+🔧 Frontend Setup
+cd ../frontend
+npm install
+Create a .env file in /client with the following:
+
+
+VITE_BASE_URL=http://localhost:3000
+VITE_BACKEND_PORT=3000
+
+then run at terminal
+npm run dev
+
+
+🔐 Demo Credentials
+👤 User Login
+Email: brijesh6514@example.com
+Password: brijesh6514@example.com
+
+
+
