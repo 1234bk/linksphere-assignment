@@ -78,7 +78,7 @@ const PostList = ({ posts,username ,role  }) => {
            {post.image && (
   <div className="w-full mt-5 mb-5 rounded-md overflow-hidden border border-gray-200">
     <img
-      src={`${BASE_URL}/uploads/${post.image}`}
+      src={`${post.image}`}
       alt="Post image"
       className="w-full object-cover max-h-[280px] sm:max-h-[320px]"
     />
