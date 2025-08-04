@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 const allowedOrigins = [
-  "https://link-sphere-bk-git-main-brijeshs-projects-de7c4008.vercel.app",
-  "https://link-sphere-5t9453c4c-brijeshs-projects-de7c4008.vercel.app"
+  "https://linksphere-assignment.vercel.app",
+  "https://linksphere-assignment.vercel.app"
 ];
 
 app.use('/by', byidRoutes); // Use byidRoutes for user-specific routes
