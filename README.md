@@ -14,6 +14,8 @@ LinkSphere is a mini-community web application inspired by LinkedIn. Built with 
 
 📄 My Profile Page for managing user info and posts
 
+Option to edit user profile
+
 
 
 
