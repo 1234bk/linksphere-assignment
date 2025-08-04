@@ -72,7 +72,7 @@ const {
         <div
   className="flex-1 ml-6 hover:scale-105 text-center transform transition duration-500 "
 >
-  <h1 className=" text-3xl sm:text-4xl font-bold text-blue-700">{name || "Unnamed User"}</h1>
+  <h1 className=" text-3xl sm:text-4xl font-bold text-blue-700">{name || ""}</h1>
   {role && <p className="text-md  sm:text-lg text-gray-600 mt-1 font-medium">{role}</p>}
 </div>
 
