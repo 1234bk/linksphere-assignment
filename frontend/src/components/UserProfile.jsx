@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const UserProfile = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-
+    
     const { userId } = useParams();
     const [userData, setUserData] = useState(null);
     const [posts, setPosts] = useState([]);
@@ -16,6 +16,10 @@ const UserProfile = () => {
     console.log("User Data:", userData);
 
     const BASE_URL = import.meta.env.VITE_BASE_URL;
+     useEffect(() => {
+    window.scrollTo(0, 0); // Page ko top pe le jaata hai
+  }, []);
+    
 
     useEffect(() => {
         const fetchUserAndPosts = async () => {
