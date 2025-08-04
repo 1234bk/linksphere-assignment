@@ -23,7 +23,7 @@ const MyProfile = () => {
         const BASE_URL = import.meta.env.VITE_BASE_URL;
   
         try {
-          const res = await axios.get(`${BASE_URL}/myprofile/${user.id}`);
+          const res = await axios.get(`${BASE_URL}/by/myprofile/${user.id}`);
           console.log("Fetched posts for user:", res.data);
           setPosts(res.data);
         } catch (err) {
