@@ -1,36 +1,56 @@
-# LinkSphere
+LinkSphere
+LinkSphere is a mini community web application inspired by LinkedIn. It is built with the MERN stack (MongoDB, Express, React, Node.js) and offers features such as user authentication, post creation, profile viewing, and an admin dashboard.
 
-LinkSphere is a mini community web application inspired by LinkedIn. It is built with the MERN stack (MongoDB, Express, React, Node.js) and provides features such as user authentication, post creation, profile viewing, and an admin dashboard.
 
----
 
-## 🌟 Features
+🌟 Features
+🔐 User Authentication with JWT
 
-- 🔐 User Authentication with JWT
-- 🏠 Dashboard showing all posts
-- ✍️ Signed-up users can create posts
-- 👀 Users can view and react to other users' posts
-- 👤 View user profiles and their posts
-- 🛡 Admin panel with access to all user data and admin privileges
+🏠 Home Dashboard showing all public posts
 
----
+👤 View Profiles: Anyone can view user profiles and their posts
 
-## 🚀 Tech Stack
+🔍 Search Users: Search for profiles by name
 
-- **Frontend**: React.js, Axios, Tailwind CSS (or other styling if used)
-- **Backend**: Express.js, Node.js, MongoDB Atlas
-- **Authentication**: JWT (JSON Web Token)
-- **API Calls**: Axios
+✍️ Authenticated Posting: Only signed-in users can add posts
 
----
+📄 My Profile: Logged-in users can view and manage their own profile and posts
 
-## 🛠️ Installation & Setup
+🛡 Admin Panel: Admins can access and manage all user data
 
+
+
+
+🚀 Tech Stack
+Frontend: React.js, Axios, Tailwind CSS
+
+Backend: Express.js, Node.js, MongoDB Atlas
+
+Authentication: JWT (JSON Web Token)
+
+Image Uploads: Cloudinary
+
+API Calls: Axios
+
+
+
+🛠️ Installation & Setup
 Clone the repository and install dependencies for both backend and frontend.
 
-### 🔹 Backend
 
-```bash
-cd backend
+
+
+🔹For Backend
+
+Copy code
+cd server
 npm install
 npm start
+
+
+🔹For Frontend
+
+Copy code
+cd client
+npm install
+npm run dev
