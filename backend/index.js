@@ -11,7 +11,7 @@ const byidRoutes = require('./routes/byidroutes'); // Import byidRoutes
 const app = express();
 const PORT = process.env.PORT;
 app.use(cors({
-  origin: "https://linksphere-assignment.vercel.app",
+  origin: "*",
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
