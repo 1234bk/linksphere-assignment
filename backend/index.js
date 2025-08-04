@@ -9,8 +9,10 @@ const byidRoutes = require('./routes/byidroutes'); // Import byidRoutes
 
 
 const app = express();
-const PORT = process.env.PORT ;
-app.use(cors());
+const PORT = process.env.PORT;
+app.use(cors({
+  origin: "https://linksphere-assignment.vercel.app",
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -45,6 +47,6 @@ function startServer() {
   app.listen(PORT, () => {
 
     console.log(`🚀 Server running on port ${PORT}`);
-    
+
   });
 }
