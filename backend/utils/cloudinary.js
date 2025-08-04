@@ -1,5 +1,6 @@
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
+const streamifier = require("streamifier");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -7,18 +8,31 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadToCloudinary = async (localFilepath) => {
-  try {
-    if (!localFilepath) return null;
-    const response = await cloudinary.uploader.upload(localFilepath, {
-      resource_type: "image",
-    });
-    fs.unlinkSync(localFilepath);
-    return response;
-  } catch (error) {
-    fs.unlinkSync(localFilepath);
-    return null;
-  }
+// const uploadToCloudinary = async (localFilepath) => {
+//   try {
+//     if (!localFilepath) return null;
+//     const response = await cloudinary.uploader.upload(localFilepath, {
+//       resource_type: "image",
+//     });
+//     fs.unlinkSync(localFilepath);
+//     return response;
+//   } catch (error) {
+//     fs.unlinkSync(localFilepath);
+//     return null;
+//   }
+// };
+
+const uploadToCloudinary = async (buffer) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { resource_type: "image" },
+      (error, result) => {
+        if (result) resolve(result);
+        else reject(error);
+      }
+    );
+    streamifier.createReadStream(buffer).pipe(stream);
+  });
 };
 
 const deleteFromCloudinary = async (publicId) => {

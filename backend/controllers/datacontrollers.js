@@ -38,30 +38,19 @@ const {uploadToCloudinary} = require("../utils/cloudinary.js");
 
 exports.addpost = async (req, res) => {
   try {
-    console.log("🚀 Incoming POST /addpost");
-    console.log("👉 req.body:", req.body);
-    console.log("👉 req.file:", req.file);
-
     const { heading, description, userId, username, role } = req.body;
 
     if (!heading || !description || !userId) {
-      return res.status(400).json({ error: "Missing required fields" });
+      return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    let cloudinaryUrl = "";
-
-    if (req.file?.path) {
-      const uploadResult = await uploadToCloudinary(req.file.path);
-      if (uploadResult) {
-        cloudinaryUrl = uploadResult.secure_url;
-      } else {
-        return res
-          .status(500)
-          .json({ error: "Failed to upload image to Cloudinary" });
-      }
+    let cloudinaryUrl = '';
+    if (req.file && req.file.buffer) {
+      const uploadResult = await uploadToCloudinary(req.file.buffer);
+      cloudinaryUrl = uploadResult.secure_url;
     }
 
-    const postData = {
+    const post = new Post({
       heading,
       description,
       username,
@@ -72,14 +61,13 @@ exports.addpost = async (req, res) => {
       comments: [],
       postId: Date.now().toString(),
       image: cloudinaryUrl,
-    };
+    });
 
-    const post = new Post(postData);
     await post.save();
 
-    res.status(201).json({ message: "Post created successfully", post });
+    res.status(201).json({ message: 'Post created successfully', post });
   } catch (error) {
-    console.error("❌ Error in /addpost:", error);
+    console.error("Error in addpost:", error);
     res.status(500).json({ error: error.message });
   }
 };
