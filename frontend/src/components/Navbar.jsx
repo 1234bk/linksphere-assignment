@@ -43,22 +43,7 @@ const Navbar = () => {
   const handleOpenMenu = (e) => setAnchorEl(e.currentTarget);
   const handleCloseMenu = () => setAnchorEl(null);
 
-  //   const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   // Simulate loading or wait for auth/user context if needed
-  //   const timer = setTimeout(() => setLoading(false), 1000);
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  //   if (loading) {
-  //   return (
-  //     <div className="w-full py-3 flex justify-center items-center bg-white shadow-md">
-  //       <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-  //       <span className="ml-2 text-blue-600 font-semibold">Loading Navbar...</span>
-  //     </div>
-  //   );
-  // }
+ 
 
   return (
     <nav className="w-full flex justify-between items-center px-4 py-3 bg-white shadow-md sticky top-0 z-50">
@@ -105,24 +90,7 @@ const Navbar = () => {
       {/* Right - Controls */}
       <div className="flex items-center gap-4">
 
-        {/* Admin (text on large, icon on small) */}
-        {token && user?.isAdmin && (
-          <>
-            <Link
-              to="/admin"
-              className=" text-blue-600 hover:text-blue-800 hover:cursor-pointer hover:scale-105 transition-transform duration-300 ease-out transform font-medium hidden sm:block"
-            >
-              Admin Page
-            </Link>
-            <Link
-              to="/admin"
-              className=" text-blue-600 hover:text-blue-800 hover:cursor-pointer hover:scale-105 transition-transform duration-300 ease-out transform sm:hidden text-xl"
-              title="Admin"
-            >
-              <FaUserShield />
-            </Link>
-          </>
-        )}
+
 
         {/* Add Post (text on large, icon on small) */}
         <Link
