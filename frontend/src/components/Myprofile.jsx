@@ -8,13 +8,16 @@ import { useEffect, useState } from "react";
 import PostList from "./PostList"; // Assuming you have a PostList component to show user's posts
 const MyProfile = () => {
   const { user } = useAuth();
+  const [userDetails, setUserDetails] = useState(null);
+
 
   if (!user) return <div className="text-center py-10 text-gray-600">User not found.</div>;
 
-  const {
-    name, email, phone, role, college, skills,
-    age, gender, description, working,
-  } = user;
+const {
+  name, email, phone, role, college, skills,
+  age, gender, description, working,
+} = userDetails || {};
+
   
     const [posts, setPosts] = useState([]);
     
@@ -34,6 +37,22 @@ const MyProfile = () => {
   
       fetchPosts();
     }, []);
+
+  useEffect(() => {
+  const fetchUserDetails = async () => {
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+    try {
+      const res = await axios.get(`${BASE_URL}/by/user/${user.id}`);
+      console.log("Fetched user details:", res.data);
+      setUserDetails(res.data);
+    } catch (err) {
+      console.error("Error fetching user details:", err.message || err);
+    }
+  };
+
+  if (user?.id) fetchUserDetails();
+}, []);
+
 
 
 
