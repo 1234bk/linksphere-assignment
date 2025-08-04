@@ -45,6 +45,9 @@ const {
       const res = await axios.get(`${BASE_URL}/by/user/${user.id}`);
       console.log("Fetched user details:", res.data);
       setUserDetails(res.data);
+      console.log("myprofile");
+      console.log(res.data);
+      
     } catch (err) {
       console.error("Error fetching user details:", err.message || err);
     }
