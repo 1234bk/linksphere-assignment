@@ -21,9 +21,9 @@ const Navbar = () => {
         setSearchResults([]);
         return;
       }
-
+ const BASE_URL = "https://linksphere-bk.onrender.com";
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/by/search-users/${searchQuery}`);
+        const res = await axios.get(`${BASE_URL}/by/search-users/${searchQuery}`);
         console.log("Search results:", res.data);
         setSearchResults(res.data);
       } catch (err) {
@@ -43,13 +43,7 @@ const Navbar = () => {
   const handleOpenMenu = (e) => setAnchorEl(e.currentTarget);
   const handleCloseMenu = () => setAnchorEl(null);
 
-  //   const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   // Simulate loading or wait for auth/user context if needed
-  //   const timer = setTimeout(() => setLoading(false), 1000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+  
 
   //   if (loading) {
   //   return (

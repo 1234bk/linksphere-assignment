@@ -48,8 +48,8 @@ const AddPost = () => {
     if (formData.image) data.append('image', formData.image);
 
 
-       const BASE_URL = import.meta.env.VITE_BASE_URL;
-   
+      //  const BASE_URL = import.meta.env.VITE_BASE_URL;
+   const BASE_URL = "https://linksphere-bk.onrender.com";
     try {
       await axios.post(`${BASE_URL}/data/addpost`, data, {
        headers: {

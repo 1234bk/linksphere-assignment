@@ -26,7 +26,8 @@ const EditProfile = () => {
     if (!user || !user.id) return; // wait until user is available
 
     const fetchUser = async () => {
-      const BASE_URL = import.meta.env.VITE_BASE_URL;
+      const BASE_URL = "https://linksphere-bk.onrender.com";
+      // const BASE_URL = import.meta.env.VITE_BASE_URL;
       try {
         const res = await axios.get(`${BASE_URL}/by/user/${user.id}`);
         setuserdata(res.data);
@@ -66,7 +67,8 @@ const EditProfile = () => {
       skills: formData.skills.split(",").map((s) => s.trim()),
     };
 
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
+    const BASE_URL = "https://linksphere-bk.onrender.com";
+    // const BASE_URL = import.meta.env.VITE_BASE_URL;
     try {
       const { data } = await axios.put(
         `${BASE_URL}/auth/updateprofile`,
