@@ -8,17 +8,24 @@ const authRoutes = require("./routes/authRoutes");
 const byidRoutes = require("./routes/byidroutes"); // Import byidRoutes
 
 
-const allowedOrigins = ["https://linksphere-assignment.vercel.app","http://localhost:5173"];
 
 // const allowedOrigins = process.env.ORIGIN_URL?.split(',');
 const app = express();
 const PORT = process.env.PORT;
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+const allowedOrigins = ["https://linksphere-assignment.vercel.app", "http://localhost:5173"]; // frontend URL
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests with no origin (like Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
