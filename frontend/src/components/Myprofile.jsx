@@ -8,22 +8,21 @@ import { useEffect, useState } from "react";
 import PostList from "./PostList"; // Assuming you have a PostList component to show user's posts
 const MyProfile = () => {
   const { user } = useAuth();
+  const [posts, setPosts] = useState([]);
+  const [userdata, setuserdata] = useState([]);
 
   if (!user) return <div className="text-center py-10 text-gray-600">User not found.</div>;
 
-  const {
-    name, email, phone, role, college, skills,
-    age, gender, description, working,
-  } = user;
+
   
-    const [posts, setPosts] = useState([]);
+    
     
     useEffect(() => {
-      const fetchPosts = async () => {
+      const fetchPost = async () => {
         const BASE_URL = import.meta.env.VITE_BASE_URL;
   
         try {
-          const res = await axios.get(`${BASE_URL}/myprofile/${user.id}`);
+          const res = await axios.get(`${BASE_URL}/by/myprofile/${user.id}`);
           console.log("Fetched posts for user:", res.data);
           setPosts(res.data);
         } catch (err) {
@@ -32,10 +31,31 @@ const MyProfile = () => {
   
       };
   
-      fetchPosts();
+      fetchPost();
     }, []);
 
+    useEffect(() => {
+      const fetchuser = async () => {
+        const BASE_URL = import.meta.env.VITE_BASE_URL;
+  
+        try {
+          const res = await axios.get(`${BASE_URL}/by/user/${user.id}`);
+          console.log("Fetched user for at myprofile:", res.data);
+          setuserdata(res.data);
+          
+        } catch (err) {
+          console.error('Error fetching posts:', err);
+        }
+  
+      };
+  
+      fetchuser();
+    }, []);
 
+  const {
+    name, email, phone, role, college, skills,
+    age, gender, description, working,
+  } = userdata || user || {};
 
   return (
     <div className="max-w-5xl mx-auto min-h-full bg-white shadow-lg rounded-lg h-full overflow-hidden">

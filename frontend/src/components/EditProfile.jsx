@@ -3,21 +3,53 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from 'axios';
 import api from '../api/axios';
+import { useEffect } from "react";
 const EditProfile = () => {
-  const { user, token, login } = useAuth();
+  const { user, token, login, setUser } = useAuth();
   const navigate = useNavigate();
 
+  const [userdata, setuserdata] = useState(null); // start as null
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    phone: user?.phone || "",
-    role: user?.role || "",
-    college: user?.college || "",
-    skills: user?.skills?.join(", ") || "",
-    age: user?.age || "",
-    gender: user?.gender || "",
-    description: user?.description || "",
-    working: user?.working || false,
+    name: "",
+    phone: "",
+    role: "",
+    college: "",
+    skills: "",
+    age: "",
+    gender: "",
+    description: "",
+    working: false,
   });
+
+  // Fetch latest user data
+  useEffect(() => {
+    if (!user || !user.id) return; // wait until user is available
+
+    const fetchUser = async () => {
+      const BASE_URL = import.meta.env.VITE_BASE_URL;
+      try {
+        const res = await axios.get(`${BASE_URL}/by/user/${user.id}`);
+        setuserdata(res.data);
+
+        // Update formData with fetched user
+        setFormData({
+          name: res.data.name || "",
+          phone: res.data.phone || "",
+          role: res.data.role || "",
+          college: res.data.college || "",
+          skills: res.data.skills?.join(", ") || "",
+          age: res.data.age || "",
+          gender: res.data.gender || "",
+          description: res.data.description || "",
+          working: res.data.working || false,
+        });
+      } catch (err) {
+        console.error("Error fetching user:", err);
+      }
+    };
+
+    fetchUser();
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -29,31 +61,37 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const updatedUser = {
       ...formData,
       skills: formData.skills.split(",").map((s) => s.trim()),
     };
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
     try {
-      const { data } = await axios.put(`${BASE_URL}/auth/updateprofile`, updatedUser, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await axios.put(
+        `${BASE_URL}/auth/updateprofile`,
+        updatedUser,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Update AuthContext with new user
+      setUser(data.updatedUser);
+      localStorage.setItem("user", JSON.stringify(data.updatedUser));
 
       alert("Profile updated!");
-      login(token, data.updatedUser); // ✅ now `data` is defined
       navigate("/myprofile");
-
-
     } catch (error) {
       console.error(error);
       alert(error.response?.data?.message || "Something went wrong");
     }
   };
+
+  if (!userdata) return <div>Loading...</div>; // wait until user is fetched
 
   return (
     <div className="max-w-2xl mx-auto p-8 mt-10 bg-white shadow-lg rounded-lg animate-fade-in border border-blue-200">

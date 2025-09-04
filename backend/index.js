@@ -7,11 +7,15 @@ const dataroutes = require("./routes/dataroutes");
 const authRoutes = require("./routes/authRoutes");
 const byidRoutes = require("./routes/byidroutes"); // Import byidRoutes
 
+
+const allowedOrigins = ["https://linksphere-assignment.vercel.app","http://localhost:5173"];
+
+// const allowedOrigins = process.env.ORIGIN_URL?.split(',');
 const app = express();
 const PORT = process.env.PORT;
 app.use(
   cors({
-    origin: process.env.ORIGIN_URL,
+    origin: allowedOrigins,
     credentials: true,
   })
 );
