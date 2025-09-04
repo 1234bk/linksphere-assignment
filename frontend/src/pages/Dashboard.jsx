@@ -13,8 +13,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+      // const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = "https://linksphere-bk.onrender.com";
       try {
         const res = await axios.get(`${BASE_URL}/data/allposts`);
         setPosts(res.data);

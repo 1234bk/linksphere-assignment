@@ -30,7 +30,7 @@ const AuthForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
+    const BASE_URL = "https://linksphere-bk.onrender.com";
 
 const endpoint = isLogin ? `${BASE_URL}/auth/login` : `${BASE_URL}/auth/register`;
 
