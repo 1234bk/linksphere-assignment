@@ -13,17 +13,21 @@ const byidRoutes = require("./routes/byidroutes"); // Import byidRoutes
 const app = express();
 const PORT = process.env.PORT;
 
-const allowedOrigins = (process.env.ORIGIN_URL || "").split(",").map(origin => origin.trim());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://linksphere-link.vercel.app"
+];
+
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // allow non-browser requests like Postman
+    if (!origin) return callback(null, true); // allow Postman or server-to-server
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true // <-- important to allow cookies/credentials
+  credentials: true  // allow withCredentials requests
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
