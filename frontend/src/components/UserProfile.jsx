@@ -15,8 +15,8 @@ const UserProfile = () => {
     console.log("User ID from route param:", userId);
     console.log("User Data:", userData);
 
-    // const BASE_URL = import.meta.env.VITE_BASE_URL;
- const BASE_URL = "https://linksphere-bk.onrender.com";
+    const BASE_URL = import.meta.env.VITE_BASE_URL;
+//  const BASE_URL = "https://linksphere-bk.onrender.com";
     useEffect(() => {
         const fetchUserAndPosts = async () => {
 

@@ -21,7 +21,9 @@ const Navbar = () => {
         setSearchResults([]);
         return;
       }
- const BASE_URL = "https://linksphere-bk.onrender.com";
+
+      const BASE_URL = import.meta.env.VITE_BASE_URL;
+//  const BASE_URL = "https://linksphere-bk.onrender.com";
       try {
         const res = await axios.get(`${BASE_URL}/by/search-users/${searchQuery}`);
         console.log("Search results:", res.data);

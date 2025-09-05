@@ -7,8 +7,8 @@ import axios from 'axios';
 
 const PostList = ({ posts,username ,role  }) => {
   const { token } = useAuth();
-  // const BASE_URL = import.meta.env.VITE_BASE_URL;
- const BASE_URL = "https://linksphere-bk.onrender.com";
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+//  const BASE_URL = "https://linksphere-bk.onrender.com";
   const [postStates, setPostStates] = useState([]);
   const [expandedPosts, setExpandedPosts] = useState({}); // 👈 New state for view more/less
  
