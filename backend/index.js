@@ -13,8 +13,17 @@ const byidRoutes = require("./routes/byidroutes"); // Import byidRoutes
 const app = express();
 const PORT = process.env.PORT;
 
+const allowedOrigins = (process.env.ORIGIN_URL || "").split(",").map(origin => origin.trim());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*" 
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow non-browser requests like Postman
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true // <-- important to allow cookies/credentials
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
